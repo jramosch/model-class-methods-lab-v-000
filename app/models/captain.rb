@@ -7,10 +7,13 @@ class Captain < ActiveRecord::Base
 
   def self.sailors
     includes(boats: :classifications).where(classifications: {name: "Sailboat"}).uniq
-    # User.where({ name: ["Alice", "Bob"]})
   end
 
   def self.talented_seafarers
     includes(boats: :classifications).where(classifications: {name: ["Motorboat", "Sailboat"]})
+  end
+
+  def self.non_sailors
+    includes(boats: :classifications).where.not(classifications: {name: "Sailboat"})
   end
 end
