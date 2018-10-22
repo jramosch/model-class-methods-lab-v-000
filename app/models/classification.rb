@@ -5,4 +5,8 @@ class Classification < ActiveRecord::Base
   def self.my_all
     all.pluck(:name).uniq
   end
+
+  def longest
+    includes(:boats).order("length DESC").first.classifications
+  end
 end
